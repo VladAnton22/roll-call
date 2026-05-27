@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { TechniqueCategory, TechniqueRating } from "../data/techniques.ts";
-import ScoreBadge from "./ScoreBadge.tsx";
+import TechniqueRow from "./TechniqueRow.tsx";
 
 interface CategorySectionProps {
   category: TechniqueCategory;
@@ -67,41 +67,14 @@ export default function CategorySection({
       {/* Technique rows */}
       {isOpen && (
         <div className="border-t border-chrome divide-y divide-chrome/60">
-          {category.techniques.map((technique) => {
-            const rating = ratings[technique.id];
-            return (
-              <button
-                key={technique.id}
-                onClick={() => onTechniqueClick(technique.id, technique.name)}
-                className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-surface-hover transition-colors text-left group"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span
-                    className={`w-2 h-2 rounded-full flex-shrink-0 transition-colors ${
-                      rating ? "bg-brand-text" : "bg-chrome group-hover:bg-chrome-strong"
-                    }`}
-                  />
-                  <span
-                    className={`text-sm font-medium truncate transition-colors ${
-                      rating ? "text-content-secondary" : "text-content-muted group-hover:text-content-secondary"
-                    }`}
-                  >
-                    {technique.name}
-                  </span>
-                </div>
- 
-                <div className="flex items-center gap-2 flex-shrink-0 ml-3">
-                  {rating ? (
-                    <ScoreBadge rating={rating} size="sm" />
-                  ) : (
-                    <span className="text-xs text-content-faint group-hover:text-content-subtle transition-colors">
-                      Rate →
-                    </span>
-                  )}
-                </div>
-              </button>
-            );
-          })}
+          {category.techniques.map((technique) => (
+            <TechniqueRow
+              key={technique.id}
+              technique={technique}
+              rating={ratings[technique.id]}
+              onClick={onTechniqueClick}
+            />
+          ))}
         </div>
       )}
     </div>
