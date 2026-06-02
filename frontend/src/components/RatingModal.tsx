@@ -57,7 +57,7 @@ export default function RatingModal({
             </div>
             <button
               onClick={onClose}
-              className="mt-1 text-content-subtle hover:text-content-muted transition-colors flex-shrink-0"
+              className="mt-1 text-content-subtle hover:text-content-muted transition-colors shrink-0"
               aria-label="Close"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

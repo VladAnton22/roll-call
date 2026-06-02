@@ -15,7 +15,7 @@ export default function TechniqueRow({ technique, rating, onClick }: TechniqueRo
     >
       <div className="flex items-center gap-3 min-w-0">
         <span
-          className={`w-2 h-2 rounded-full flex-shrink-0 transition-colors ${
+          className={`w-2 h-2 rounded-full shrink-0 transition-colors ${
             rating ? "bg-brand-text" : "bg-chrome group-hover:bg-chrome-strong"
           }`}
         />
@@ -30,7 +30,7 @@ export default function TechniqueRow({ technique, rating, onClick }: TechniqueRo
         </span>
       </div>
 
-      <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+      <div className="flex items-center gap-2 shrink-0 ml-3">
         {rating ? (
           <ScoreBadge rating={rating} size="sm" />
         ) : (

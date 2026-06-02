@@ -37,7 +37,7 @@ export default function CategorySection({
       >
         <div className="flex items-center gap-3 min-w-0">
           <svg
-            className={`w-4 h-4 text-content-subtle flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
+            className={`w-4 h-4 text-content-subtle shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
             fill="none" viewBox="0 0 24 24" stroke="currentColor"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -45,7 +45,7 @@ export default function CategorySection({
           <span className="font-bold text-content-primary text-base truncate">{category.name}</span>
         </div>
  
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           {avgRating !== null && (
             <div className="hidden sm:flex items-center gap-1.5">
               <span className="text-xs text-content-subtle">avg</span>

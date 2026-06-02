@@ -38,7 +38,7 @@ export default function RatingScale({ selected, onChange }: RatingScaleProps) {
                 isSelected ? RATING_SELECTED[r] : RATING_IDLE[r]
               }`}
             >
-              <span className="text-lg font-black leading-none mt-0.5 w-5 flex-shrink-0">
+              <span className="text-lg font-black leading-none mt-0.5 w-5 shrink-0">
                 {r}
               </span>
               <div className="min-w-0">
