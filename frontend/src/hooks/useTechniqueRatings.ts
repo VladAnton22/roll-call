@@ -1,33 +1,11 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import type { TechniqueRating, Confidence } from "../data/techniques";
+import useLocalStorage from "./useLocalStorage";
 
 export type RatingsMap = Record<string, TechniqueRating>;
 
-const STORAGE_KEY = "rollcall:ratings";
-
-function loadFromStorage(): RatingsMap {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as RatingsMap) : {};
-  } catch {
-    return {};
-  }
-}
-
-function saveToStorage(ratings: RatingsMap) : void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(ratings))
-  } catch {
-    // Fail silently
-  }
-}
-
 export function useTechniqueRatings() {
-  const [ratings, setRatings] = useState<RatingsMap>(loadFromStorage);
-
-  useEffect(() => {
-    saveToStorage(ratings);
-  }, [ratings]);
+  const [ratings, setRatings] = useLocalStorage<RatingsMap>("ratings", {});
 
   const setRating = useCallback(
     (techniqueId: string, rating: 1 | 2 | 3 | 4 | 5, confidence: Confidence) => {
@@ -36,7 +14,7 @@ export function useTechniqueRatings() {
         [techniqueId]: { rating, confidence },
       }));
     },
-    []
+    [setRatings]
   );
 
   const clearRating = useCallback((techniqueId: string) => {
@@ -45,7 +23,7 @@ export function useTechniqueRatings() {
       delete next[techniqueId];
       return next;
     });
-  }, []);
+  }, [setRatings]);
 
   const getRating = useCallback(
     (techniqueId: string): TechniqueRating | undefined => ratings[techniqueId],
