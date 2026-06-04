@@ -13,7 +13,7 @@ BJJ progress is hard to measure. RollCall gives you a structured way to audit yo
 - **Rate every technique** in your arsenal using a 1–5 skill rating and a Low/Medium/High confidence score
 - **Visualise your game** with a radar chart across categories (guard, passing, submissions, escapes, etc.)
 - **Log training sessions** to track volume and notes over time
-- **Identify weak points** at a glance — so you know exactly what to drill next
+- **Identify weak points** at a glance so you know exactly what to drill next
 
 ---
 
