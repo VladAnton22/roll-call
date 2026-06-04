@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TechniqueCategory, TechniqueRating } from "../data/techniques.ts";
+import type { TechniqueCategory, TechniqueRating } from "../../data/techniques.ts";
 import TechniqueRow from "./TechniqueRow.tsx";
 
 interface CategorySectionProps {

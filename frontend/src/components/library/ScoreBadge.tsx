@@ -1,4 +1,4 @@
-import type { TechniqueRating } from "../data/techniques.ts";
+import type { TechniqueRating } from "../../data/techniques.ts";
 
 interface ScoreBadgeProps {
   rating: TechniqueRating;

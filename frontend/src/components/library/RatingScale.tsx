@@ -1,4 +1,4 @@
-import { RATING_LABELS } from "../data/techniques.ts";
+import { RATING_LABELS } from "../../data/techniques.ts";
 
 const RATING_IDLE: Record<number, string> = {
   1: "bg-rating-1 border-rating-1-border text-rating-1-text hover:bg-rating-1-hover",

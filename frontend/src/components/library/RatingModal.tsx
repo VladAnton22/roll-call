@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TechniqueRating, Confidence } from "../data/techniques.ts";
+import type { TechniqueRating, Confidence } from "../../data/techniques.ts";
 import RatingScale from "./RatingScale.tsx";
 import ConfidenceSelector from "./ConfidenceSelector.tsx";
 

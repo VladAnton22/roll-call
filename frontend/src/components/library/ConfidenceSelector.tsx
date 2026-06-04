@@ -1,5 +1,5 @@
-import type { Confidence } from "../data/techniques.ts";
-import { CONFIDENCE_LABELS } from "../data/techniques.ts";
+import type { Confidence } from "../../data/techniques.ts";
+import { CONFIDENCE_LABELS } from "../../data/techniques.ts";
 
 interface ConfidenceSelectorProps {
   selected: Confidence | null;

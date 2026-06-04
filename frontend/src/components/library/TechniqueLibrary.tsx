@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { TECHNIQUE_CATEGORIES } from "../data/techniques.ts";
-import type { Confidence } from "../data/techniques.ts";
-import { useTechniqueRatings } from "../hooks/useTechniqueRatings.ts";
+import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
+import type { Confidence } from "../../data/techniques.ts";
+import { useTechniqueRatings } from "../../hooks/useTechniqueRatings.ts";
 import CategorySection from "./CategorySection.tsx";
 import RatingModal from "./RatingModal.tsx";
 import TechniqueSearchBar from "./TechniqueSearchBar.tsx";
@@ -48,7 +48,7 @@ export default function TechniqueLibrary() {
 
   return (
     <div className="min-h-screen bg-surface-base text-content-primary">
-        <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
+      <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
 
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
         <div className="mb-6">

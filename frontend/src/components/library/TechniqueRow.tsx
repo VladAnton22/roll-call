@@ -1,4 +1,4 @@
-import type { Technique, TechniqueRating } from "../data/techniques.ts";
+import type { Technique, TechniqueRating } from "../../data/techniques.ts";
 import ScoreBadge from "./ScoreBadge.tsx";
 
 interface TechniqueRowProps {
