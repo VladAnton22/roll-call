@@ -2,7 +2,7 @@
 
 A progress tracking app for Brazilian Jiu-Jitsu practitioners. Rate your techniques, visualise your game, and identify where you're strong and where you need work.
 
-> 🚧 Currently in active development — MVP in progress.
+> 🚧 Currently in active development - MVP in progress.
 
 ---
  
@@ -66,7 +66,7 @@ docker-compose up
 ## MVP Roadmap
  
 - [x] Technique library UI
-- [ ] Ratings persistence (localStorage → PostgreSQL)
+- [x] Ratings persistence (localStorage → PostgreSQL)
 - [ ] Progress visualisation (radar chart)
 - [ ] Session logging
 - [ ] User auth + accounts
