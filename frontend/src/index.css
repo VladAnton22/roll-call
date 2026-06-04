@@ -1,66 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+
 @theme {
-  --color-surface-base: #030712;
-  --color-surface-card: rgba(17, 24, 39, 0.5);
-  --color-surface-elevated: #111827;
-  --color-surface-input: #111827;
-  --color-surface-hover: rgba(31, 41, 55, 0.4);
+  /* Surfaces */
+  --color-surface-base: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-input: #ffffff;
+  --color-surface-hover: #f1f5f9;
 
-  --color-chrome: #1f2937;
-  --color-chrome-strong: #374151;
+  /* Borders / chrome */
+  --color-chrome: #cbd5e1;
+  --color-chrome-strong: #94a3b8;
 
-  --color-content-primary: #ffffff;
-  --color-content-secondary: #e5e7eb;
-  --color-content-muted: #9ca3af;
-  --color-content-subtle: #6b7280;
-  --color-content-faint: #4b5563;
+  /* Text */
+  --color-content-primary: #0f172a;
+  --color-content-secondary: #334155;
+  --color-content-muted: #64748b;
+  --color-content-subtle: #94a3b8;
+  --color-content-faint: #cbd5e1;
 
-  --color-brand: #4f46e5;
-  --color-brand-hover: #6366f1;
-  --color-brand-border: #818cf8;
-  --color-brand-text: #818cf8;
-  --color-brand-subtle: #6366f1;
-  --color-brand-shadow: rgba(49, 46, 129, 0.5);
+  /* Brand */
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-brand-border: #3b82f6;
+  --color-brand-text: #2563eb;
+  --color-brand-subtle: #60a5fa;
+  --color-brand-shadow: rgba(37, 99, 235, 0.2);
 
-  /* Rating levels — idle */
-  --color-rating-1: rgba(127, 29, 29, 0.6);
-  --color-rating-1-border: #b91c1c;
-  --color-rating-1-text: #fca5a5;
-  --color-rating-1-hover: rgba(153, 27, 27, 0.7);
-  --color-rating-1-selected: #b91c1c;
-  --color-rating-1-selected-border: #f87171;
-  --color-rating-1-selected-ring: #f87171;
+  /* White Belt */
+  --color-rating-1: #f8fafc;
+  --color-rating-1-border: #cbd5e1;
+  --color-rating-1-text: #334155;
+  --color-rating-1-hover: #f1f5f9;
+  --color-rating-1-selected: #ffffff;
+  --color-rating-1-selected-border: #94a3b8;
+  --color-rating-1-selected-ring: #cbd5e1;
 
-  --color-rating-2: rgba(124, 45, 18, 0.6);
-  --color-rating-2-border: #c2410c;
-  --color-rating-2-text: #fdba74;
-  --color-rating-2-hover: rgba(154, 52, 18, 0.7);
-  --color-rating-2-selected: #c2410c;
-  --color-rating-2-selected-border: #fb923c;
-  --color-rating-2-selected-ring: #fb923c;
+  /* Blue Belt */
+  --color-rating-2: #dbeafe;
+  --color-rating-2-border: #3b82f6;
+  --color-rating-2-text: #1e3a8a;
+  --color-rating-2-hover: #bfdbfe;
+  --color-rating-2-selected: #2563eb;
+  --color-rating-2-selected-border: #1d4ed8;
+  --color-rating-2-selected-ring: #60a5fa;
 
-  --color-rating-3: rgba(113, 63, 18, 0.6);
-  --color-rating-3-border: #a16207;
-  --color-rating-3-text: #fde047;
-  --color-rating-3-hover: rgba(133, 77, 14, 0.7);
-  --color-rating-3-selected: #a16207;
-  --color-rating-3-selected-border: #facc15;
-  --color-rating-3-selected-ring: #facc15;
+  /* Purple Belt */
+  --color-rating-3: #ede9fe;
+  --color-rating-3-border: #8b5cf6;
+  --color-rating-3-text: #5b21b6;
+  --color-rating-3-hover: #ddd6fe;
+  --color-rating-3-selected: #7c3aed;
+  --color-rating-3-selected-border: #6d28d9;
+  --color-rating-3-selected-ring: #a78bfa;
 
-  --color-rating-4: rgba(6, 59, 34, 0.6);
-  --color-rating-4-border: #047857;
-  --color-rating-4-text: #6ee7b7;
-  --color-rating-4-hover: rgba(6, 78, 59, 0.7);
-  --color-rating-4-selected: #047857;
-  --color-rating-4-selected-border: #34d399;
-  --color-rating-4-selected-ring: #34d399;
+  /* Brown Belt */
+  --color-rating-4: #f5e1d4;
+  --color-rating-4-border: #92400e;
+  --color-rating-4-text: #78350f;
+  --color-rating-4-hover: #edd5c4;
+  --color-rating-4-selected: #92400e;
+  --color-rating-4-selected-border: #78350f;
+  --color-rating-4-selected-ring: #b45309;
 
-  --color-rating-5: rgba(8, 51, 68, 0.6);
-  --color-rating-5-border: #0e7490;
-  --color-rating-5-text: #67e8f9;
-  --color-rating-5-hover: rgba(21, 94, 117, 0.7);
-  --color-rating-5-selected: #0e7490;
-  --color-rating-5-selected-border: #22d3ee;
-  --color-rating-5-selected-ring: #22d3ee;
+  /* Black Belt */
+  --color-rating-5: #e5e7eb;
+  --color-rating-5-border: #111827;
+  --color-rating-5-text: #111827;
+  --color-rating-5-hover: #d1d5db;
+  --color-rating-5-selected: #111827;
+  --color-rating-5-selected-border: #000000;
+  --color-rating-5-selected-ring: #374151;
+
+  /* Fonts */
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
 }

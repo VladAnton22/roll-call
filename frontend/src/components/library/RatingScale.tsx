@@ -9,7 +9,7 @@ const RATING_IDLE: Record<number, string> = {
 };
 
 const RATING_SELECTED: Record<number, string> = {
-  1: "bg-rating-1-selected border-rating-1-selected-border text-white ring-2 ring-rating-1-selected-ring",
+  1: "bg-rating-1-selected border-rating-1-selected-border text-rating-1-text ring-2 ring-rating-1-selected-ring",
   2: "bg-rating-2-selected border-rating-2-selected-border text-white ring-2 ring-rating-2-selected-ring",
   3: "bg-rating-3-selected border-rating-3-selected-border text-white ring-2 ring-rating-3-selected-ring",
   4: "bg-rating-4-selected border-rating-4-selected-border text-white ring-2 ring-rating-4-selected-ring",

@@ -13,13 +13,15 @@ interface ActiveTechnique {
 }
 
 export default function TechniqueLibrary() {
-  const { ratings, setRating, clearRating, getRating, ratedCount } = useTechniqueRatings();
-  const [activeTechnique, setActiveTechnique] = useState<ActiveTechnique | null>(null);
+  const { ratings, setRating, clearRating, getRating, ratedCount } =
+    useTechniqueRatings();
+  const [activeTechnique, setActiveTechnique] =
+    useState<ActiveTechnique | null>(null);
   const [search, setSearch] = useState("");
 
   const totalTechniques = TECHNIQUE_CATEGORIES.reduce(
     (sum, cat) => sum + cat.techniques.length,
-    0
+    0,
   );
 
   // Filter categories/techniques by search query
@@ -27,7 +29,7 @@ export default function TechniqueLibrary() {
     ? TECHNIQUE_CATEGORIES.map((cat) => ({
         ...cat,
         techniques: cat.techniques.filter((t) =>
-          t.name.toLowerCase().includes(search.toLowerCase())
+          t.name.toLowerCase().includes(search.toLowerCase()),
         ),
       })).filter((cat) => cat.techniques.length > 0)
     : TECHNIQUE_CATEGORIES;
@@ -48,18 +50,10 @@ export default function TechniqueLibrary() {
 
   return (
     <div className="min-h-screen bg-surface-base text-content-primary">
-      <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
-
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
-        <div className="mb-6">
-          <h1 className="text-2xl font-black tracking-tight text-content-primary mb-1">Technique Library</h1>
-          <p className="text-sm text-content-subtle">
-            Tap any technique to rate it. Score = Rating (1-5) + Confidence (L/M/H).
-          </p>
-        </div>
- 
+        <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
         <TechniqueSearchBar value={search} onChange={setSearch} />
- 
+
         {filteredCategories.length > 0 ? (
           filteredCategories.map((category) => (
             <CategorySection
@@ -76,7 +70,7 @@ export default function TechniqueLibrary() {
           </div>
         )}
       </main>
- 
+
       {activeTechnique && (
         <RatingModal
           techniqueName={activeTechnique.name}
