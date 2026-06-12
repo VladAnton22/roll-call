@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
-
 
 @theme {
   /* Surfaces */
@@ -74,6 +73,24 @@
   --color-rating-5-selected: #111827;
   --color-rating-5-selected-border: #000000;
   --color-rating-5-selected-ring: #374151;
+
+  /* Strong */
+  --color-strong: #dcfce7;
+  --color-strong-border: #22c55e;
+  --color-strong-text: #14532d;
+  --color-strong-hover: #bbf7d0;
+  --color-strong-selected: #16a34a;
+  --color-strong-selected-border: #15803d;
+  --color-strong-selected-ring: #4ade80;
+
+  /* Weak */
+  --color-weak: #fee2e2;
+  --color-weak-border: #ef4444;
+  --color-weak-text: #7f1d1d;
+  --color-weak-hover: #fecaca;
+  --color-weak-selected: #dc2626;
+  --color-weak-selected-border: #b91c1c;
+  --color-weak-selected-ring: #f87171;
 
   /* Fonts */
   --font-sans: "Inter", sans-serif;

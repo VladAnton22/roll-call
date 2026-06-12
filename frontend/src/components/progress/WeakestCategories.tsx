@@ -1,5 +1,6 @@
 import { TECHNIQUE_CATEGORIES } from "../../data/techniques";
 import { type RatingsMap } from "../../hooks/useTechniqueRatings";
+import getRatingColors from "../../data/ratingColors";
 
 interface CategoryScore {
   name: string;
@@ -24,18 +25,18 @@ function buildCategoryScores(ratings: RatingsMap): CategoryScore[] {
   });
 }
 
-const BAR_COLORS: Record<number, string> = {
-  0: "bg-rating-1-border",
-  1: "bg-rating-1-border",
-  2: "bg-rating-2-selected",
-  3: "bg-rating-3-selected",
-  4: "bg-rating-4-selected",
-  5: "bg-rating-5-selected",
-};
+// const BAR_COLORS: Record<number, string> = {
+//   0: "bg-rating-1-border",
+//   1: "bg-rating-1-border",
+//   2: "bg-rating-2-selected",
+//   3: "bg-rating-3-selected",
+//   4: "bg-rating-4-selected",
+//   5: "bg-rating-5-selected",
+// };
 
-function barColor(avg: number): string {
-  return BAR_COLORS[Math.round(avg)] ?? "bg-content-faint";
-}
+// function barColor(avg: number): string {
+//   return BAR_COLORS[Math.round(avg)] ?? "bg-content-faint";
+// }
 
 interface WeakestCategoriesProps {
   ratings: RatingsMap;
@@ -78,7 +79,7 @@ export default function WeakestCategories({ ratings }: WeakestCategoriesProps) {
             </div>
             <div className="h-1.5 bg-chrome rounded-full overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all duration-500 ${barColor(cat.avg)}`}
+                className={`h-full rounded-full transition-all duration-500 ${getRatingColors(cat.avg).bgSelected}`}
                 style={{ width: `${(cat.avg / 5) * 100}%` }}
               />
             </div>
