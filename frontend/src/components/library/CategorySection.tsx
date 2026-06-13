@@ -43,15 +43,16 @@ export default function CategorySection({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
           </svg>
           <span className="font-bold text-content-primary text-base truncate">{category.name}</span>
-        </div>
- 
-        <div className="flex items-center gap-3 shrink-0">
           {avgRating !== null && (
             <div className="hidden sm:flex items-center gap-1.5">
               <span className="text-xs text-content-subtle">avg</span>
               <span className="text-sm font-bold text-content-secondary">{avgRating.toFixed(1)}</span>
             </div>
           )}
+        </div>
+ 
+        <div className="flex items-center gap-3 shrink-0">
+          
           <span className="text-xs text-content-subtle tabular-nums">
             {ratedInCategory}/{totalInCategory}
           </span>

@@ -5,14 +5,20 @@ interface SummaryStats {
   totalRated: number;
   totalTechniques: number;
   overallAvg: number;
-  strongestCategory: string | null;
-  weakestCategory: string | null;
+  strongestCategory: {
+    name: string;
+    avg: number;
+  } | null;
+  weakestCategory: {
+    name: string;
+    avg: number;
+  } | null;
 }
 
 function computeStats(ratings: RatingsMap): SummaryStats {
   const totalTechniques = TECHNIQUE_CATEGORIES.reduce(
     (sum, cat) => sum + cat.techniques.length,
-    0
+    0,
   );
   const totalRated = Object.keys(ratings).length;
 
@@ -33,11 +39,11 @@ function computeStats(ratings: RatingsMap): SummaryStats {
 
   const strongest =
     categoryAvgs.length > 0
-      ? categoryAvgs.reduce((a, b) => (a.avg >= b.avg ? a : b)).name
+      ? categoryAvgs.reduce((a, b) => (a.avg >= b.avg ? a : b))
       : null;
   const weakest =
     categoryAvgs.length > 0
-      ? categoryAvgs.reduce((a, b) => (a.avg <= b.avg ? a : b)).name
+      ? categoryAvgs.reduce((a, b) => (a.avg <= b.avg ? a : b))
       : null;
 
   return {
@@ -61,9 +67,7 @@ function StatCell({ label, value, sub }: StatCellProps) {
       <span className="text-2xl font-black text-content-primary tabular-nums">
         {value}
       </span>
-      {sub && (
-        <span className="text-xs text-content-subtle">{sub}</span>
-      )}
+      {sub && <span className="text-xs text-content-subtle">{sub}</span>}
       <span className="text-xs font-semibold tracking-widest uppercase text-content-muted text-center">
         {label}
       </span>
@@ -78,8 +82,13 @@ interface ProgressSummaryProps {
 export default function ProgressSummary({ ratings }: ProgressSummaryProps) {
   if (Object.keys(ratings).length === 0) return null;
 
-  const { totalRated, totalTechniques, overallAvg, strongestCategory, weakestCategory } =
-    computeStats(ratings);
+  const {
+    totalRated,
+    totalTechniques,
+    overallAvg,
+    strongestCategory,
+    weakestCategory,
+  } = computeStats(ratings);
 
   const completionPct = Math.round((totalRated / totalTechniques) * 100);
 
@@ -100,28 +109,39 @@ export default function ProgressSummary({ ratings }: ProgressSummaryProps) {
           value={overallAvg.toFixed(1)}
           sub="out of 5"
         />
-        <StatCell
-          label="Coverage"
-          value={`${completionPct}%`}
-        />
+        <StatCell label="Coverage" value={`${completionPct}%`} />
       </div>
 
       {(strongestCategory || weakestCategory) && (
         <div className="grid grid-cols-2 gap-3">
           {strongestCategory && (
-            <div className="rounded-xl border border-strong-border bg-strong px-3 py-2.5">
+            <div className="rounded-xl border flex flex-row justify-between border-strong-border bg-strong px-3 py-2.5">
+                <div>
               <p className="text-xs font-semibold tracking-widest uppercase text-strong-text mb-0.5">
                 Strongest
               </p>
-              <p className="text-sm font-bold text-strong-text">{strongestCategory}</p>
+              <p className="text-sm font-bold text-strong-text">
+                {strongestCategory.name}
+              </p>
+              </div>
+              <p className="my-auto text-md font-semibold text-strong-text">
+                {strongestCategory.avg.toFixed(1)}/5
+              </p>
             </div>
           )}
           {weakestCategory && (
-            <div className="rounded-xl border border-weak-border bg-weak px-3 py-2.5">
-              <p className="text-xs font-semibold tracking-widest uppercase text-weak-text mb-0.5">
-                Needs Work
+            <div className="rounded-xl border flex flex-row justify-between border-weak-border bg-weak px-3 py-2.5">
+              <div className="my-auto">
+                <p className="text-xs font-semibold tracking-widest uppercase text-weak-text mb-0.5">
+                  Needs Work
+                </p>
+                <p className="text-sm font-bold text-weak-text">
+                  {weakestCategory.name}
+                </p>
+              </div>
+              <p className="my-auto font-semibold text-md text-weak-text">
+                {weakestCategory.avg.toFixed(1)}/5
               </p>
-              <p className="text-sm font-bold text-weak-text">{weakestCategory}</p>
             </div>
           )}
         </div>
