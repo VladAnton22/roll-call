@@ -67,7 +67,7 @@ docker-compose up
  
 - [x] Technique library UI
 - [x] Ratings persistence (localStorage → PostgreSQL)
-- [ ] Progress visualisation (radar chart)
+- [x] Progress visualisation (radar chart)
 - [ ] Session logging
 - [ ] User auth + accounts
 - [ ] Subscription tier (Stripe)
