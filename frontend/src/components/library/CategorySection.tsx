@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { TechniqueCategory, TechniqueRating } from "../../data/techniques.ts";
 import TechniqueRow from "./TechniqueRow.tsx";
+import { ChevronRightIcon } from "../icons/index.tsx";
 
 interface CategorySectionProps {
   category: TechniqueCategory;
@@ -36,12 +37,9 @@ export default function CategorySection({
         className="w-full flex items-center justify-between px-5 py-4 hover:bg-surface-hover transition-colors text-left gap-4"
       >
         <div className="flex items-center gap-3 min-w-0">
-          <svg
+          <ChevronRightIcon
             className={`w-4 h-4 text-content-subtle shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
-            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-          </svg>
+          />
           <span className="font-bold text-content-primary text-base truncate">{category.name}</span>
           {avgRating !== null && (
             <div className="hidden sm:flex items-center gap-1.5">

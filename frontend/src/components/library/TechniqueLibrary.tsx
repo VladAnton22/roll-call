@@ -49,7 +49,7 @@ export default function TechniqueLibrary() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-base text-content-primary">
+    <div>
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
         <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
         <TechniqueSearchBar value={search} onChange={setSearch} />

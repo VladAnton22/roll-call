@@ -35,7 +35,7 @@ export default function TechniqueRow({ technique, rating, onClick }: TechniqueRo
           <ScoreBadge rating={rating} size="sm" />
         ) : (
           <span className="text-xs text-content-faint group-hover:text-content-subtle transition-colors">
-            Rate →
+            Rate
           </span>
         )}
       </div>
