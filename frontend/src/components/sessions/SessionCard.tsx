@@ -1,9 +1,8 @@
 import type { Session } from "../../hooks/useSessionLog";
-import { TrashIcon } from "../icons";
 
 interface SessionCardProps {
   session: Session;
-  onDelete: (id: string) => void;
+  onClick: (session: Session) => void;
 }
 
 function formatDate(isoDate: string) {
@@ -23,11 +22,14 @@ function formatDuration(mins: number) {
   return m > 0 ? `${h}h ${m}m` : `${h}h`;
 }
 
-export default function SessionCard({ session, onDelete }: SessionCardProps) {
+export default function SessionCard({ session, onClick }: SessionCardProps) {
   return (
-    <div className="bg-surface-card border border-chrome rounded-2xl px-5 py-4 flex gap-4 items-start">
+    <button
+      onClick={() => onClick(session)}
+      className="w-full bg-surface-card border border-chrome rounded-2xl px-5 py-4 flex gap-4 items-start text-left hover:bg-surface-hover transition-colors"
+    >
       {/* Left: date block */}
-      <div className="shrink-0 text-center bg-surface-base border border-chrome rounded-xl px-3 py-2 min-w-13">
+      <div className="shrink-0 text-center bg-surface-base border border-chrome rounded-xl px-3 py-2 min-w-[52px]">
         <p className="text-xs font-semibold text-content-subtle leading-none mb-0.5">
           {new Date(session.date + "T12:00:00").toLocaleDateString("en-IE", { month: "short" }).toUpperCase()}
         </p>
@@ -35,7 +37,7 @@ export default function SessionCard({ session, onDelete }: SessionCardProps) {
           {new Date(session.date + "T12:00:00").getDate()}
         </p>
       </div>
-
+ 
       {/* Middle: details */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
@@ -57,15 +59,6 @@ export default function SessionCard({ session, onDelete }: SessionCardProps) {
           <p className="text-sm text-content-faint italic">No notes</p>
         )}
       </div>
-
-      {/* Right: delete */}
-      <button
-        onClick={() => onDelete(session.id)}
-        aria-label="Delete session"
-        className="shrink-0 mt-0.5 text-content-faint hover:text-red-400 transition-colors"
-      >
-        <TrashIcon />
-      </button>
-    </div>
+    </button>
   );
 }

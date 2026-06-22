@@ -5,11 +5,11 @@ export type SessionType = "gi" | "no-gi";
 
 export interface Session {
     id: string;
-    date: string;   // ISO date string YYYY-MM-DD
+    date: string; // ISO date string YYYY-MM-DD
     type: SessionType;
     durationMins: number;
     notes: string;
-    createdAt: string;  // ISO timestamp
+    createdAt: string; // ISO timestamp
 }
 
 export function useSessionLog() {
@@ -22,21 +22,30 @@ export function useSessionLog() {
                 id: crypto.randomUUID(),
                 createdAt: new Date().toISOString(),
             };
-            setSessions((prev) => [session, ...prev])
+            setSessions((prev) => [session, ...prev]);
         },
-        [setSessions]
+        [setSessions],
+    );
+
+    const updateSession = useCallback(
+        (id: string, data: Omit<Session, "id" | "createdAt">) => {
+            setSessions((prev) =>
+                prev.map((s) => (s.id === id ? { ...s, ...data } : s)),
+            );
+        },
+        [setSessions],
     );
 
     const deleteSession = useCallback(
         (id: string) => {
             setSessions((prev) => prev.filter((s) => s.id !== id));
         },
-        [setSessions]
+        [setSessions],
     );
 
     const sorted = [...sessions].sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
-    return { sessions: sorted, addSession, deleteSession };
+    return { sessions: sorted, addSession, updateSession, deleteSession };
 }

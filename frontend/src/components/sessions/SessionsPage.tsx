@@ -1,20 +1,32 @@
 import { useState } from "react";
-import { useSessionLog } from "../../hooks/useSessionLog";
-import LogSessionModal from "./LogSessionModal";
+import { useSessionLog, type Session } from "../../hooks/useSessionLog";
+import SessionFormModal from "./SessionFormModal";
+import SessionDetailModal from "./SessionDetailModal";
 import SessionCard from "./SessionCard";
 import SessionStatsBar from "./SessionStatsBar";
 import SessionEmptyState from "./SessionEmptyState";
 import PrimaryButton from "../ui/PrimaryButton";
 import { PlusIcon } from "../icons";
 
+type ModalState =
+  | { kind: "none" }
+  | { kind: "create" }
+  | { kind: "detail"; session: Session }
+  | { kind: "edit"; session: Session };
+
 export default function SessionsPage() {
-  const { sessions, addSession, deleteSession } = useSessionLog();
-  const [modalOpen, setModalOpen] = useState(false);
+  const { sessions, addSession, updateSession, deleteSession } = useSessionLog();
+  const [modal, setModal] = useState<ModalState>({ kind: "none" });
 
   const totalMins = sessions.reduce((sum, s) => sum + s.durationMins, 0);
   const totalHours = Math.floor(totalMins / 60);
   const giCount = sessions.filter((s) => s.type === "gi").length;
   const nogiCount = sessions.filter((s) => s.type === "no-gi").length;
+
+  function handleDelete(id: string) {
+    deleteSession(id);
+    setModal({ kind: "none" });
+  }
 
   return (
     <>
@@ -28,7 +40,7 @@ export default function SessionsPage() {
               Track your training time and keep a journal.
             </p>
           </div>
-          <PrimaryButton onClick={() => setModalOpen(true)}>
+          <PrimaryButton onClick={() => setModal({ kind: "create" })}>
             <span className="flex items-center gap-2">
             <PlusIcon />
             Log Session
@@ -46,19 +58,36 @@ export default function SessionsPage() {
             />
             <div className="space-y-3">
               {sessions.map((session) => (
-                <SessionCard key={session.id} session={session} onDelete={deleteSession} />
+                <SessionCard key={session.id} session={session} onClick={(s) => setModal({ kind: "detail", session: s })} />
               ))}
             </div>
           </>
         ) : (
-          <SessionEmptyState onLogSession={() => setModalOpen(true)} />
+          <SessionEmptyState onLogSession={() => setModal({ kind: "create" })} />
         )}
       </main>
 
-      {modalOpen && (
-        <LogSessionModal
-          onSave={addSession}
-          onClose={() => setModalOpen(false)}
+      {modal.kind === "create" && (
+        <SessionFormModal
+          onSubmit={addSession}
+          onClose={() => setModal({ kind: "none" })}
+        />
+      )}
+ 
+      {modal.kind === "detail" && (
+        <SessionDetailModal
+          session={modal.session}
+          onEdit={() => setModal({ kind: "edit", session: modal.session })}
+          onDelete={() => handleDelete(modal.session.id)}
+          onClose={() => setModal({ kind: "none" })}
+        />
+      )}
+ 
+      {modal.kind === "edit" && (
+        <SessionFormModal
+          initialSession={modal.session}
+          onSubmit={(data) => updateSession(modal.session.id, data)}
+          onClose={() => setModal({ kind: "none" })}
         />
       )}
     </>

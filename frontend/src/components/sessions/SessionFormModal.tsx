@@ -1,16 +1,19 @@
 import { useState } from "react";
-import type { SessionType } from "../../hooks/useSessionLog";
+import type { Session, SessionType } from "../../hooks/useSessionLog";
 import ModalShell from "../ui/ModalShell.tsx";
 import PrimaryButton from "../ui/PrimaryButton.tsx";
 import FormField from "../ui/FormField.tsx";
 
-interface LogSessionModalProps {
-  onSave: (data: {
-    date: string;
-    type: SessionType;
-    durationMins: number;
-    notes: string;
-  }) => void;
+export interface SessionFormData {
+  date: string;
+  type: SessionType;
+  durationMins: number;
+  notes: string;
+}
+
+interface SessionFormModalProps {
+  initialSession?: Session;
+  onSubmit: (data: SessionFormData) => void;
   onClose: () => void;
 }
 
@@ -21,24 +24,36 @@ function today() {
 const INPUT_CLASSES =
   "w-full bg-surface-input border border-chrome rounded-xl px-4 py-2.5 text-sm text-content-primary focus:outline-none focus:border-brand-border transition-colors";
 
-export default function LogSessionModal({ onSave, onClose }: LogSessionModalProps) {
-  const [date, setDate] = useState(today());
-  const [type, setType] = useState<SessionType>("gi");
-  const [durationMins, setDurationMins] = useState<string>("60");
-  const [notes, setNotes] = useState("");
+export default function SessionFormModal({
+  initialSession,
+  onSubmit,
+  onClose,
+}: SessionFormModalProps) {
+  const isEditing = Boolean(initialSession);
+  const [date, setDate] = useState(initialSession?.date ?? today());
+  const [type, setType] = useState<SessionType>(initialSession?.type ?? "gi");
+  const [durationMins, setDurationMins] = useState<string>(
+    initialSession ? String(initialSession.durationMins) : "60",
+  );
+  const [notes, setNotes] = useState(initialSession?.notes ?? "");
 
   const canSave = Boolean(date && durationMins && Number(durationMins) > 0);
 
   function handleSave() {
     if (!canSave) return;
-    onSave({ date, type, durationMins: Number(durationMins), notes: notes.trim() });
+    onSubmit({
+      date,
+      type,
+      durationMins: Number(durationMins),
+      notes: notes.trim(),
+    });
     onClose();
   }
 
   return (
     <ModalShell
-      eyebrow="New Session"
-      title="Log a Training Session"
+      eyebrow={isEditing ? "Edit Session" : "New Session"}
+      title={isEditing ? "Edit Training Session" : "Log a Training Session"}
       onClose={onClose}
       footer={
         <>
@@ -49,7 +64,7 @@ export default function LogSessionModal({ onSave, onClose }: LogSessionModalProp
             Cancel
           </button>
           <PrimaryButton onClick={handleSave} disabled={!canSave} fullWidth>
-            Save Session
+            {isEditing ? "Save Changes" : "Save Session"}
           </PrimaryButton>
         </>
       }
@@ -105,10 +120,11 @@ function TypeToggle({ value, onChange }: TypeToggleProps) {
         <button
           key={t}
           onClick={() => onChange(t)}
-          className={`flex-1 py-2.5 rounded-xl text-sm font-bold border transition-all duration-150 ${value === t
-            ? "bg-brand text-white border-brand shadow-lg shadow-brand-shadow"
-            : "bg-surface-input border-chrome text-content-muted hover:border-chrome-strong"
-            }`}
+          className={`flex-1 py-2.5 rounded-xl text-sm font-bold border transition-all duration-150 ${
+            value === t
+              ? "bg-brand text-white border-brand shadow-lg shadow-brand-shadow"
+              : "bg-surface-input border-chrome text-content-muted hover:border-chrome-strong"
+          }`}
         >
           {t === "gi" ? "Gi" : "No-Gi"}
         </button>
