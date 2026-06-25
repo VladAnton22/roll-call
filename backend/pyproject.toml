@@ -1,0 +1,15 @@
+[project]
+name = "rollcall-api"
+version = "0.1.0"
+description = "RollCall BJJ technique tracking API"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.6",
+    "uvicorn[standard]>=0.34.0",
+    "psycopg[binary]>=3.2.3",
+]
+
+# This is an application, not a distributable package — uv just manages the
+# environment, it doesn't build/install "rollcall-api" itself.
+[tool.uv]
+package = false
