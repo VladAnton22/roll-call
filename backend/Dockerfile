@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1 \
     UV_PROJECT_ENVIRONMENT=/opt/venv
     
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-WORKDIR /app
+WORKDIR /code
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 ENV PATH="/opt/venv/bin:$PATH"
@@ -18,7 +18,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 FROM base AS dev
 ENV ENV=dev
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 
 # ---- prod: the Fargate deliverable. Source baked in, non-root, real workers ----
 FROM base AS prod
@@ -27,4 +27,4 @@ COPY . .
 RUN useradd --create-home --uid 1000 appuser && chown -R appuser /opt/venv
 USER appuser
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

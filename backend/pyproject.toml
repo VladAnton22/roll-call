@@ -7,6 +7,11 @@ dependencies = [
     "fastapi>=0.115.6",
     "uvicorn[standard]>=0.34.0",
     "psycopg[binary]>=3.2.3",
+    "alembic>=1.18.5",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.2",
+    "sqlalchemy>=2.0.51",
+    "pytest>=9.1.1",
 ]
 
 # This is an application, not a distributable package — uv just manages the
