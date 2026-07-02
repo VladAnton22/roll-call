@@ -12,10 +12,23 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=Path(__file__).resolve().parents[2] / ".env",
         env_file_encoding="utf-8",
+        extra="ignore"
     )
 
     @property
+    def _dsn_tail(self) -> str:
+        """"""
+        return (
+            f"{self.POSTGRES_USER}:{parse.quote(self.POSTGRES_PASSWORD)}"
+            f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        )
+
+    @property
     def database_url(self):
-        return f"postgresql://{self.POSTGRES_USER}:{parse.quote(self.POSTGRES_PASSWORD)}@{self.POSTGRES_HOST}/{self.POSTGRES_DB}"
+        return f"postgresql://{self._dsn_tail}"
+
+    @property
+    def sqlalchemy_url(self) -> str:
+        return f"postgresql+psycopg://{self._dsn_tail}"
 
 settings = Settings()   # type: ignore[call-arg]
