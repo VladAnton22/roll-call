@@ -1,21 +1,15 @@
-from collections.abc import AsyncGenerator
-
-from sqlalchemy.ext.asyncio import (
-    AsyncSession,
-    async_sessionmaker,
-    create_async_engine,
-)
+from typing import Generator
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
 
 from app.core.config import settings
 
-engine = create_async_engine(settings.sqlalchemy_url, echo=True)
+engine = create_engine(settings.sqlalchemy_url, pool_pre_ping=True)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
-AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
-
-async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """FastAPI dependency: yields a session and guarantees it's closed.
-
-    Routes commits explicitly: the context manager just handles teardown.
-    """
-    async with AsyncSessionLocal() as session:
-        yield session
+async def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
