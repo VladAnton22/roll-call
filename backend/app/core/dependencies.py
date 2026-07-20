@@ -41,3 +41,11 @@ async def get_current_user(
         raise credentials_exception
 
     return user
+
+def get_current_active_user(user: Annotated[UserResponse, Depends(get_current_user)]) -> UserResponse:
+    if user.disabled:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Account is disabled. Please contact support.",
+        )
+    return user
