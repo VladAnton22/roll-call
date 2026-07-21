@@ -1,5 +1,5 @@
 from uuid import UUID
-from typing import Annotated, Optional
+from typing import Annotated
 
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
@@ -10,7 +10,6 @@ from app.core.security import decode_token
 from app.db.session import get_db
 from app.models.user import User
 from app.crud import user_crud
-from app.schemas.user_schemas import UserResponse
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token")
 
@@ -32,20 +31,22 @@ async def get_current_user(
         user_id: str | None = payload.get("sub")
         if user_id is None:
             raise credentials_exception
-    except InvalidTokenError:
+
+        user_uuid = UUID(user_id)
+    except (InvalidTokenError, ValueError):
         raise credentials_exception
 
-    user = user_crud.get_by_id(db, UUID(user_id))
+    user = user_crud.get_by_id(db, user_uuid)
 
     if user is None:
         raise credentials_exception
 
     return user
 
-def get_current_active_user(user: Annotated[UserResponse, Depends(get_current_user)]) -> UserResponse:
-    if user.disabled:
+def get_current_active_user(current_user: Annotated[User, Depends(get_current_user)]) -> User:
+    if current_user.disabled:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Account is disabled. Please contact support.",
+            detail="Inactive user",
         )
-    return user
+    return current_user
