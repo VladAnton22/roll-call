@@ -1,3 +1,4 @@
+from typing import Literal
 from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from urllib import parse
@@ -8,10 +9,16 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     POSTGRES_HOST: str
     POSTGRES_PORT: str
+
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     REFRESH_TOKEN_EXPIRE_DAYS: int
+
+    COOKIE_SECURE: bool = True
+    COOKIE_SAMESITE: Literal["lax", "strict", "none"] = "lax"
+    FRONTEND_ORIGIN: str = "http://localhost:5173"
+
     debug: bool = True
 
     model_config = SettingsConfigDict(
