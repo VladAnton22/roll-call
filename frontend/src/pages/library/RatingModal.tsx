@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { TechniqueRating, Confidence } from "../../data/techniques.ts";
 import RatingScale from "./RatingScale.tsx";
 import ConfidenceSelector from "./ConfidenceSelector.tsx";
-import ModalShell from "../ui/ModalShell.tsx";
-import PrimaryButton from "../ui/PrimaryButton.tsx";
+import ModalShell from "../../components/ui/ModalShell.tsx";
+import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
 
 interface RatingModalProps {
   techniqueName: string;

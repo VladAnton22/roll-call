@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useSessionLog, type Session } from "../../hooks/useSessionLog";
-import SessionFormModal from "./SessionFormModal";
-import SessionDetailModal from "./SessionDetailModal";
-import SessionCard from "./SessionCard";
-import SessionStatsBar from "./SessionStatsBar";
-import SessionEmptyState from "./SessionEmptyState";
-import PrimaryButton from "../ui/PrimaryButton";
-import { PlusIcon } from "../icons";
+import { useSessionLog, type Session } from "../../hooks/useSessionLog.ts";
+import SessionFormModal from "./SessionFormModal.tsx";
+import SessionDetailModal from "./SessionDetailModal.tsx";
+import SessionCard from "./SessionCard.tsx";
+import SessionStatsBar from "./SessionStatsBar.tsx";
+import SessionEmptyState from "./SessionEmptyState.tsx";
+import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
+import { PlusIcon } from "../../components/icons";
 
 type ModalState =
   | { kind: "none" }

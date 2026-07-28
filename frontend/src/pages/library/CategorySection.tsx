@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { TechniqueCategory, TechniqueRating } from "../../data/techniques.ts";
 import TechniqueRow from "./TechniqueRow.tsx";
-import { ChevronRightIcon } from "../icons/index.tsx";
+import { ChevronRightIcon } from "../../components/icons";
 
 interface CategorySectionProps {
   category: TechniqueCategory;

@@ -1,7 +1,7 @@
-import { useTechniqueRatings } from "../../hooks/useTechniqueRatings";
-import CategoryRadarChart from "./CategoryRadarChart";
-import WeakestCategories from "./WeakestCategories";
-import ProgressSummary from "./ProgressSummary";
+import { useTechniqueRatings } from "../../hooks/useTechniqueRatings.ts";
+import CategoryRadarChart from "./CategoryRadarChart.tsx";
+import WeakestCategories from "./WeakestCategories.tsx";
+import ProgressSummary from "./ProgressSummary.tsx";
 
 export default function ProgressPage() {
     const { ratings } = useTechniqueRatings();

@@ -7,8 +7,8 @@ import {
   Tooltip,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
-import { TECHNIQUE_CATEGORIES } from "../../data/techniques";
-import { type RatingsMap } from "../../hooks/useTechniqueRatings";
+import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
+import { type RatingsMap } from "../../hooks/useTechniqueRatings.ts";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 

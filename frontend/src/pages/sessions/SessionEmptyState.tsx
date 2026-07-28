@@ -1,4 +1,4 @@
-import { CalendarIcon } from "../icons";
+import { CalendarIcon } from "../../components/icons";
 
 interface SessionEmptyStateProps {
   onLogSession: () => void;

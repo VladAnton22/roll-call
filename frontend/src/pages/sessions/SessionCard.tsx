@@ -1,4 +1,4 @@
-import type { Session } from "../../hooks/useSessionLog";
+import type { Session } from "../../hooks/useSessionLog.ts";
 
 interface SessionCardProps {
   session: Session;

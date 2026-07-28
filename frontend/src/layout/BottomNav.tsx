@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { NavLibraryIcon, NavProgressIcon, NavSessionsIcon } from "../icons";
+import { NavLibraryIcon, NavProgressIcon, NavSessionsIcon } from "../components/icons";
 
 export default function BottomNav() {
     const base = "flex flex-col items-center gap-1 text-xs font-medium transition-colors py-2 px-6";

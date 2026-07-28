@@ -1,5 +1,5 @@
-import { TECHNIQUE_CATEGORIES } from "../../data/techniques";
-import { type RatingsMap } from "../../hooks/useTechniqueRatings";
+import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
+import { type RatingsMap } from "../../hooks/useTechniqueRatings.ts";
 
 interface SummaryStats {
   totalRated: number;

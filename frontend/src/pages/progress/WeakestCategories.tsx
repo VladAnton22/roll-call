@@ -1,6 +1,6 @@
-import { TECHNIQUE_CATEGORIES } from "../../data/techniques";
-import { type RatingsMap } from "../../hooks/useTechniqueRatings";
-import getRatingColors from "../../data/ratingColors";
+import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
+import { type RatingsMap } from "../../hooks/useTechniqueRatings.ts";
+import getRatingColors from "../../data/ratingColors.ts";
 
 interface CategoryScore {
   name: string;

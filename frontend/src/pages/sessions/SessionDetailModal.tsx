@@ -1,6 +1,6 @@
-import type { Session } from "../../hooks/useSessionLog";
-import ModalShell from "../ui/ModalShell.tsx";
-import PrimaryButton from "../ui/PrimaryButton.tsx";
+import type { Session } from "../../hooks/useSessionLog.ts";
+import ModalShell from "../../components/ui/ModalShell.tsx";
+import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
 
 interface SessionDetailModalProps {
   session: Session;

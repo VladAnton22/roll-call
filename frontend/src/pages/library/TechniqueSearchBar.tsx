@@ -1,4 +1,4 @@
-import { SearchIcon, CloseIcon } from "../icons";
+import { SearchIcon, CloseIcon } from "../../components/icons";
 
 interface TechniqueSearchBarProps {
   value: string;
