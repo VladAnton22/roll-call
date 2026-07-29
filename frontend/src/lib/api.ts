@@ -17,7 +17,38 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
+let onAuthFailure: (() => void) | null = null;
+
+export function setAuthFailureHandler(fn: (() => void) | null): void {
+  onAuthFailure = fn
+}
+
+let refreshing: Promise<string> | null = null;
+
+export function refreshAccessToken(): Promise<string> {
+  if (!refreshing) {
+    refreshing = fetch(`${BASE_URL}/auth/refresh`, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new ApiError(res.status, "Session expired");
+        const data = await res.json();
+        setAccessToken(data.access_token);
+        return data.access_token as string;
+      })
+      .finally(() => {
+        refreshing = null;
+      });
+  }
+  return refreshing
+}
+
+async function request<T>(
+    path: string,
+    init: RequestInit = {},
+    retry = true,
+): Promise<T> {
   const headers = new Headers(init.headers);
   if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
 
@@ -26,6 +57,17 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     headers,
     credentials: "include", // required for the refresh cookie to be set/sent
   });
+
+  if (response.status === 401 && retry && !path.startsWith("/auth/")) {
+    try {
+      await refreshAccessToken();
+    } catch {
+      setAccessToken(null);
+      onAuthFailure?.();
+      throw new ApiError(401, "Session expired");
+    }
+    return request<T>(path, init, false);
+  }
 
   if (!response.ok) {
     let detail = response.statusText;

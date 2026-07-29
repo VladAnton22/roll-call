@@ -4,9 +4,9 @@ import {
   useContext,
   useMemo,
   useState,
-  type ReactNode,
+  type ReactNode, useEffect,
 } from "react";
-import { api, setAccessToken } from "../lib/api";
+import {api, refreshAccessToken, setAccessToken, setAuthFailureHandler} from "../lib/api";
 
 export type User = { id: string; username: string; email: string };
 
@@ -25,7 +25,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [status, setStatus] = useState<AuthStatus>("anonymous"); // M2: start as "loading"
+  const [status, setStatus] = useState<AuthStatus>("loading")
 
   const login = useCallback(async (username: string, password: string) => {
     const tokens = await api.postForm<TokenResponse>("/auth/token", {
@@ -48,6 +48,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAccessToken(null);
     setUser(null);
     setStatus("anonymous");
+  }, []);
+
+  // Let the API layer flip to anonymous when a mid-session refresh fails
+  useEffect(() => {
+    setAuthFailureHandler(() => {
+      console.log("[authFailure] handler fired");
+      setAccessToken(null);
+      setUser(null);
+      setStatus("anonymous");
+    });
+    return () => setAuthFailureHandler(null);
+  }, []);
+
+  // On load: memory is empty, try to recover session via cookie
+  useEffect(() => {
+    let cancelled = false;
+
+    refreshAccessToken()
+      .then(() => api.get<User>("/users/me"))
+      .then((me) => {
+        console.log("[load] success, cancelled =", cancelled);
+        if (!cancelled) {
+          setUser(me);
+          setStatus("authenticated");
+        }
+      })
+      .catch((err) => {
+        console.log("[load] CAUGHT, cancelled =", cancelled, "err =", err);
+        if (!cancelled) setStatus("anonymous");
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const value = useMemo(
