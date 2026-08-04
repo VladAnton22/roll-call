@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { ApiError } from "../../lib/api.ts";
 import FormField from "../../components/ui/FormField.tsx";
@@ -54,6 +54,12 @@ export function Login() {
       <PrimaryButton onClick={handleSubmit} disabled={submitting}>
         {submitting ? "Signing in…" : "Sign in"}
       </PrimaryButton>
+      <p className="text-sm text-content-muted">
+        Don't have an account?{" "}
+        <Link to="/register" className="text-brand-text hover:underline">
+          Create one
+        </Link>
+      </p>
     </div>
   );
 }

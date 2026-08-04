@@ -18,6 +18,7 @@ type AuthContextValue = {
   user: User | null;
   status: AuthStatus;
   login: (username: string, password: string) => Promise<void>;
+  register: (username: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -38,6 +39,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(me);
     setStatus("authenticated");
   }, []);
+
+  const register = useCallback(
+      async (username: string, email: string, password: string) => {
+        await api.post("/auth/register", {username, email, password});
+        await login(username, password);
+      },
+      [login],
+  );
 
   const logout = useCallback(async () => {
     try {
@@ -85,8 +94,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ user, status, login, logout }),
-    [user, status, login, logout],
+    () => ({ user, status, login, register, logout }),
+    [user, status, login, register, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
