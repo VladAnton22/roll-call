@@ -7,13 +7,16 @@ import { Routes, Route } from 'react-router';
 import { Login } from "./pages/login/Login.tsx";
 import { Register } from "./pages/register/Register.tsx"
 import {RequireAuth} from "./components/RequireAuth.tsx";
+import { RedirectIfAuthenticated } from "./components/RedirectIfAuthenticated.tsx";
 
 function App() {
     return (
         <>
             <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route element={<RedirectIfAuthenticated />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Route>
                 {/* Protected - guard first, then the shell, then pages */}
                 <Route element={<RequireAuth />}>
                     <Route element={<Layout />}>
