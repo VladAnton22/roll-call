@@ -25,19 +25,6 @@ function buildCategoryScores(ratings: RatingsMap): CategoryScore[] {
   });
 }
 
-// const BAR_COLORS: Record<number, string> = {
-//   0: "bg-rating-1-border",
-//   1: "bg-rating-1-border",
-//   2: "bg-rating-2-selected",
-//   3: "bg-rating-3-selected",
-//   4: "bg-rating-4-selected",
-//   5: "bg-rating-5-selected",
-// };
-
-// function barColor(avg: number): string {
-//   return BAR_COLORS[Math.round(avg)] ?? "bg-content-faint";
-// }
-
 interface WeakestCategoriesProps {
   ratings: RatingsMap;
 }

@@ -47,5 +47,14 @@ export function useSessionLog() {
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
-    return { sessions: sorted, addSession, updateSession, deleteSession };
+    const sessionsThisWeek = sorted.filter((s) => {
+        const now = new Date();
+        const daysSinceMonday = (now.getDay() + 6) % 7;
+        const monday = new Date(now);
+        monday.setDate(now.getDate() - daysSinceMonday);
+        monday.setHours(0, 0, 0, 0);
+        return new Date(s.date + "T00:00:00") >= monday;
+    }).length;
+
+    return { sessions: sorted, sessionsThisWeek, addSession, updateSession, deleteSession };
 }
