@@ -6,6 +6,7 @@ import CategorySection from "./CategorySection.tsx";
 import RatingModal from "./RatingModal.tsx";
 import TechniqueSearchBar from "./TechniqueSearchBar.tsx";
 import TechniqueLibraryHeader from "./TechniqueLibraryHeader.tsx";
+import LibraryProgress from "./LibraryProgress.tsx"
 
 interface ActiveTechnique {
   id: string;
@@ -13,11 +14,10 @@ interface ActiveTechnique {
 }
 
 export default function TechniqueLibrary() {
-  const { ratings, setRating, clearRating, getRating, ratedCount } =
-    useTechniqueRatings();
-  const [activeTechnique, setActiveTechnique] =
-    useState<ActiveTechnique | null>(null);
+  const { ratings, setRating, clearRating, getRating, ratedCount } = useTechniqueRatings();
+  const [activeTechnique, setActiveTechnique] = useState<ActiveTechnique | null>(null);
   const [search, setSearch] = useState("");
+  const [openCategoryId, setOpenCategoryId] = useState<string | null>(null);
 
   const totalTechniques = TECHNIQUE_CATEGORIES.reduce(
     (sum, cat) => sum + cat.techniques.length,
@@ -51,7 +51,8 @@ export default function TechniqueLibrary() {
   return (
     <div>
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
-        <TechniqueLibraryHeader ratedCount={ratedCount} total={totalTechniques} />
+        <TechniqueLibraryHeader />
+        <LibraryProgress rated={ratedCount} total={totalTechniques} />
         <TechniqueSearchBar value={search} onChange={setSearch} />
 
         {filteredCategories.length > 0 ? (
@@ -60,6 +61,12 @@ export default function TechniqueLibrary() {
               key={category.id}
               category={category}
               ratings={ratings}
+              isOpen={search.trim() ? true : openCategoryId === category.id}
+              onToggle={() =>
+                setOpenCategoryId((current) =>
+                  current === category.id ? null : category.id
+                )
+              }
               onTechniqueClick={handleTechniqueClick}
             />
           ))

@@ -9,6 +9,7 @@ import {
 import { Radar } from "react-chartjs-2";
 import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
 import { type RatingsMap } from "../../hooks/useTechniqueRatings.ts";
+import { getCategoryStats } from "../../data/categoryStats.ts";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
@@ -18,13 +19,8 @@ function getCSSVar(name: string): string {
 
 function buildRadarData(ratings: RatingsMap) {
   return TECHNIQUE_CATEGORIES.map((cat) => {
-    const rated = cat.techniques.filter((t) => ratings[t.id] !== undefined);
-    const avg =
-      rated.length > 0
-        ? rated.reduce((sum, t) => sum + ratings[t.id].rating, 0) / rated.length
-        : 0;
-
-    return { label: cat.name, avg: parseFloat(avg.toFixed(2)) };
+    const { average } = getCategoryStats(cat, ratings);
+    return { label: cat.name, avg: average ?? 0 };
   });
 }
 
@@ -109,8 +105,8 @@ export default function CategoryRadarChart({
         Game Overview
       </p>
       <Radar data={chartData} options={options} />
-      <p className="text-xs text-content-faint text-center mt-2">
-        Scale 0 – 5 · spokes with no ratings plot at 0
+      <p className="text-xs text-content-subtle text-center mt-2">
+        Scale 0 – 5
       </p>
     </div>
   );
