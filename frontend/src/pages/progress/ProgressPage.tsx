@@ -3,7 +3,6 @@ import {useSessionLog} from "../../hooks/useSessionLog.ts";
 import CategoryRadarChart from "./CategoryRadarChart.tsx";
 import WeakestCategories from "./WeakestCategories.tsx";
 import ProgressSummary from "./ProgressSummary.tsx";
-import CategoryExtremes from "./CategoryExtremes.tsx";
 
 export default function ProgressPage() {
     const { ratings } = useTechniqueRatings();
@@ -15,7 +14,6 @@ export default function ProgressPage() {
                 </div>
                 <ProgressSummary ratings={ratings} sessionsThisWeek={sessionsThisWeek}></ProgressSummary>
                 <CategoryRadarChart ratings={ratings}></CategoryRadarChart>
-                <CategoryExtremes ratings={ratings}></CategoryExtremes>
                 <WeakestCategories ratings={ratings}></WeakestCategories>
             </main>
     )

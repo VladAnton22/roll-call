@@ -3,7 +3,7 @@ import { useSessionLog, type Session } from "../../hooks/useSessionLog.ts";
 import SessionFormModal from "./SessionFormModal.tsx";
 import SessionDetailModal from "./SessionDetailModal.tsx";
 import SessionCard from "./SessionCard.tsx";
-import SessionStatsBar from "./SessionStatsBar.tsx";
+import SessionStats from "./SessionStats.tsx";
 import SessionEmptyState from "./SessionEmptyState.tsx";
 import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
 import { PlusIcon } from "../../components/icons";
@@ -15,7 +15,7 @@ type ModalState =
   | { kind: "edit"; session: Session };
 
 export default function SessionsPage() {
-  const { sessions, addSession, updateSession, deleteSession } = useSessionLog();
+  const { sessions, sessionsThisWeek, minutesThisWeek, updateSession, deleteSession } = useSessionLog();
   const [modal, setModal] = useState<ModalState>({ kind: "none" });
 
   const totalMins = sessions.reduce((sum, s) => sum + s.durationMins, 0);
@@ -31,15 +31,10 @@ export default function SessionsPage() {
   return (
     <>
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
-        <div className="mb-6 flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-black tracking-tight text-content-primary mb-1">
+        <div className="mb-6 flex items-center justify-between gap-4">
+            <h1 className="text-2xl font-black text-content-primary mb-1">
               Sessions
             </h1>
-            <p className="text-sm text-content-subtle">
-              Track your training time and keep a journal.
-            </p>
-          </div>
           <PrimaryButton onClick={() => setModal({ kind: "create" })}>
             <span className="flex items-center gap-2">
             <PlusIcon />
@@ -50,11 +45,9 @@ export default function SessionsPage() {
 
         {sessions.length > 0 ? (
           <>
-            <SessionStatsBar
-              total={sessions.length}
-              totalHours={totalHours}
-              giCount={giCount}
-              nogiCount={nogiCount}
+            <SessionStats
+              sessionsThisWeek={sessionsThisWeek}
+              minutesThisWeek={minutesThisWeek}
             />
             <div className="space-y-3">
               {sessions.map((session) => (

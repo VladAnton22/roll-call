@@ -5,7 +5,6 @@ import { useTechniqueRatings } from "../../hooks/useTechniqueRatings.ts";
 import CategorySection from "./CategorySection.tsx";
 import RatingModal from "./RatingModal.tsx";
 import TechniqueSearchBar from "./TechniqueSearchBar.tsx";
-import TechniqueLibraryHeader from "./TechniqueLibraryHeader.tsx";
 import LibraryProgress from "./LibraryProgress.tsx"
 
 interface ActiveTechnique {
@@ -51,7 +50,11 @@ export default function TechniqueLibrary() {
   return (
     <div>
       <main className="max-w-2xl mx-auto px-4 pb-24 pt-6 space-y-3">
-        <TechniqueLibraryHeader />
+        <div className="mb-6">
+          <h1 className="text-2xl font-black tracking-tight text-content-primary mb-1">
+            Technique Library
+          </h1>
+        </div>
         <LibraryProgress rated={ratedCount} total={totalTechniques} />
         <TechniqueSearchBar value={search} onChange={setSearch} />
 

@@ -39,7 +39,7 @@ export default function WeakestCategories({ ratings }: WeakestCategoriesProps) {
 
   return (
     <div className="rounded-2xl border border-chrome bg-surface-card px-4 py-6">
-      <p className="text-xs font-semibold tracking-widest uppercase text-content-muted mb-4">
+      <p className="font-bold text-content-primary mb-6">
         Focus Areas
       </p>
 

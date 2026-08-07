@@ -10,6 +10,7 @@ import { Radar } from "react-chartjs-2";
 import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
 import { type RatingsMap } from "../../hooks/useTechniqueRatings.ts";
 import { getCategoryStats } from "../../data/categoryStats.ts";
+import CategoryExtremes from "./CategoryExtremes.tsx";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
@@ -101,13 +102,16 @@ export default function CategoryRadarChart({
 
   return (
     <div className="rounded-2xl border border-chrome bg-surface-card px-4 py-6">
-      <p className="text-xs font-semibold tracking-widest uppercase text-content-muted mb-4">
-        Game Overview
-      </p>
-      <Radar data={chartData} options={options} />
-      <p className="text-xs text-content-subtle text-center mt-2">
-        Scale 0 – 5
-      </p>
+      <div className="mb-5">
+        <p className="font-bold text-content-primary">
+          Game Overview
+        </p>
+        <Radar data={chartData} options={options} />
+        <p className="text-xs text-content-subtle text-center">
+          Scale 0 – 5
+        </p>
+      </div>
+      <CategoryExtremes ratings={ratings}/>
     </div>
   );
 }
