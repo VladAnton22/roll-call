@@ -3,12 +3,14 @@ import type { Session, SessionType } from "../../hooks/useSessionLog.ts";
 import ModalShell from "../../components/ui/ModalShell.tsx";
 import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
 import FormField from "../../components/ui/FormField.tsx";
+import TechniquePicker from "./TechniquePicker.tsx";
 
 export interface SessionFormData {
   date: string;
   type: SessionType;
   durationMins: number;
   notes: string;
+  techniqueIds: string[];
 }
 
 interface SessionFormModalProps {
@@ -36,8 +38,17 @@ export default function SessionFormModal({
     initialSession ? String(initialSession.durationMins) : "60",
   );
   const [notes, setNotes] = useState(initialSession?.notes ?? "");
+  const [techniqueIds, setTechniqueIds] = useState<string[]>(
+    initialSession?.techniqueIds ?? [],
+  );
 
   const canSave = Boolean(date && durationMins && Number(durationMins) > 0);
+
+  function toggleTechnique(id: string) {
+    setTechniqueIds((prev) =>
+      prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id],
+    );
+  }
 
   function handleSave() {
     if (!canSave) return;
@@ -46,6 +57,7 @@ export default function SessionFormModal({
       type,
       durationMins: Number(durationMins),
       notes: notes.trim(),
+      techniqueIds,
     });
     onClose();
   }
@@ -95,6 +107,17 @@ export default function SessionFormModal({
         />
       </FormField>
 
+      <FormField
+        label="Techniques worked"
+        hint={
+          techniqueIds.length > 0
+            ? `(${techniqueIds.length} selected)`
+            : "(optional)"
+        }
+      >
+        <TechniquePicker selectedIds={techniqueIds} onToggle={toggleTechnique} />
+      </FormField>
+
       <FormField label="Notes" hint="(optional)">
         <textarea
           value={notes}
@@ -119,6 +142,7 @@ function TypeToggle({ value, onChange }: TypeToggleProps) {
       {(["gi", "no-gi"] as SessionType[]).map((t) => (
         <button
           key={t}
+          type="button"
           onClick={() => onChange(t)}
           className={`flex-1 py-2.5 rounded-xl text-sm font-bold border transition-all duration-150 ${
             value === t

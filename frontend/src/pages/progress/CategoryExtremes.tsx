@@ -32,12 +32,12 @@ export default function CategoryExtremes({ ratings }: CategoryExtremesProps) {
       </div>
 
       <div className="rounded-xl border border-weak-border bg-weak px-3 py-2.5 flex flex-col justify-between">
-          <p className="text-xs font-semibold tracking-widest text-weak-text mb-0.5">
-            WEAKEST
-          </p>
-          <p className="text-sm font-bold text-weak-text">{weakest.name}</p>
+        <p className="text-xs font-semibold tracking-widest text-weak-text mb-0.5">
+        WEAKEST
+        </p>
+        <p className="text-sm font-bold text-weak-text">{weakest.name}</p>
         <p className="my-auto text-sm font-semibold text-weak-text">
-          {weakest.avg.toFixed(1)}/5
+        {weakest.avg.toFixed(1)}/5
         </p>
       </div>
     </div>

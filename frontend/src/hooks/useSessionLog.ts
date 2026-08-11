@@ -9,6 +9,7 @@ export interface Session {
   type: SessionType;
   durationMins: number;
   notes: string;
+  techniqueIds: string[];
   createdAt: string; // ISO timestamp
 }
 
@@ -28,6 +29,7 @@ export function useSessionLog() {
     (data: Omit<Session, "id" | "createdAt">) => {
       const session: Session = {
         ...data,
+        techniqueIds: data.techniqueIds ?? [],
         id: crypto.randomUUID(),
         createdAt: new Date().toISOString(),
       };
@@ -38,7 +40,11 @@ export function useSessionLog() {
 
   const updateSession = useCallback(
     (id: string, data: Omit<Session, "id" | "createdAt">) => {
-      setSessions((prev) => prev.map((s) => (s.id === id ? { ...s, ...data } : s)));
+      setSessions((prev) =>
+        prev.map((s) =>
+          s.id === id ? { ...s, ...data } : s
+        )
+      );
     },
     [setSessions],
   );
@@ -50,8 +56,10 @@ export function useSessionLog() {
     [setSessions],
   );
 
-  const sorted = [...sessions].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  const sorted = [...sessions]
+    .map((s) => ({ ...s, techniqueIds: s.techniqueIds ?? [] }))
+    .sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
   const monday = startOfWeek();

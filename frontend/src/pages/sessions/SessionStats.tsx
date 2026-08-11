@@ -24,7 +24,7 @@ export default function SessionStats({
       <StatCell label="Hours This Week" value={formatHours(minutesThisWeek)} />
       <StatCell
         label="Avg Min / Session"
-        value={sessionsThisWeek > 0 ? String(avgMins) : "—"}
+        value={sessionsThisWeek > 0 ? String(avgMins) : "-"}
       />
     </StatGrid>
   );

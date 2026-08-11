@@ -15,13 +15,9 @@ type ModalState =
   | { kind: "edit"; session: Session };
 
 export default function SessionsPage() {
-  const { sessions, sessionsThisWeek, minutesThisWeek, updateSession, deleteSession } = useSessionLog();
+  const { sessions, addSession, sessionsThisWeek, minutesThisWeek, updateSession, deleteSession } = useSessionLog();
   const [modal, setModal] = useState<ModalState>({ kind: "none" });
 
-  const totalMins = sessions.reduce((sum, s) => sum + s.durationMins, 0);
-  const totalHours = Math.floor(totalMins / 60);
-  const giCount = sessions.filter((s) => s.type === "gi").length;
-  const nogiCount = sessions.filter((s) => s.type === "no-gi").length;
 
   function handleDelete(id: string) {
     deleteSession(id);
