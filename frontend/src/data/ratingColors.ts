@@ -6,6 +6,7 @@ export interface RatingColorSet {
     bgSelected: string;
     borderSelected: string;
     ring: string;
+    selectedText: string;
 }
 
 const RATING_COLORS: Record<number, RatingColorSet> = {
@@ -17,6 +18,7 @@ const RATING_COLORS: Record<number, RatingColorSet> = {
         bgSelected: "bg-rating-1-selected",
         borderSelected: "border-rating-1-selected-border",
         ring: "ring-rating-1-selected-ring",
+        selectedText: "text-rating-1-selected-text",
     },
     2: {
         bg: "bg-rating-2",
@@ -26,6 +28,7 @@ const RATING_COLORS: Record<number, RatingColorSet> = {
         bgSelected: "bg-rating-2-selected",
         borderSelected: "border-rating-2-selected-border",
         ring: "ring-rating-2-selected-ring",
+        selectedText: "text-rating-2-selected-text",
     },
     3: {
         bg: "bg-rating-3",
@@ -35,6 +38,7 @@ const RATING_COLORS: Record<number, RatingColorSet> = {
         bgSelected: "bg-rating-3-selected",
         borderSelected: "border-rating-3-selected-border",
         ring: "ring-rating-3-selected-ring",
+        selectedText: "text-rating-3-selected-text",
     },
     4: {
         bg: "bg-rating-4",
@@ -44,6 +48,7 @@ const RATING_COLORS: Record<number, RatingColorSet> = {
         bgSelected: "bg-rating-4-selected",
         borderSelected: "border-rating-4-selected-border",
         ring: "ring-rating-4-selected-ring",
+        selectedText: "text-rating-4-selected-text",
     },
     5: {
         bg: "bg-rating-5",
@@ -53,6 +58,7 @@ const RATING_COLORS: Record<number, RatingColorSet> = {
         bgSelected: "bg-rating-5-selected",
         borderSelected: "border-rating-5-selected-border",
         ring: "ring-rating-5-selected-ring",
+        selectedText: "text-rating-5-selected-text",
     },
 };
 

@@ -14,12 +14,10 @@ export default function RatingScale({ selected, onChange }: RatingScaleProps) {
       </p>
       <div className="space-y-2">
         {([1, 2, 3, 4, 5] as const).map((r) => {
-          const colors = getRatingColors(r)
+          const colors = getRatingColors(r);
           const isSelected = selected === r;
           const ratingClasses = isSelected
-            ? `${colors.bgSelected} ${colors.borderSelected} ring-2 ${colors.ring} ${
-                r === 1 ? colors.text : "text-white"
-              }`
+            ? `${colors.bgSelected} ${colors.borderSelected} ring-2 ${colors.ring} ${colors.selectedText}`
             : `${colors.bg} ${colors.border} ${colors.text} ${colors.bgHover}`;
           return (
             <button

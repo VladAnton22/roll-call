@@ -1,4 +1,5 @@
 import type { Session } from "../../hooks/useSessionLog.ts";
+import { TECHNIQUE_CATEGORIES } from "../../data/techniques.ts";
 import ModalShell from "../../components/ui/ModalShell.tsx";
 import PrimaryButton from "../../components/ui/PrimaryButton.tsx";
 
@@ -8,6 +9,16 @@ interface SessionDetailModalProps {
   onDelete: () => void;
   onClose: () => void;
 }
+
+const TECHNIQUE_NAMES: Record<string, string> = (() => {
+  const map: Record<string, string> = {};
+  for (const category of TECHNIQUE_CATEGORIES) {
+    for (const technique of category.techniques) {
+      map[technique.id] = technique.name;
+    }
+  }
+  return map;
+})();
 
 function formatFullDate(isoDate: string) {
   const [year, month, day] = isoDate.split("-").map(Number);
@@ -32,6 +43,10 @@ export default function SessionDetailModal({
   onDelete,
   onClose,
 }: SessionDetailModalProps) {
+  const techniqueNames = (session.techniqueIds ?? [])
+    .map((id) => TECHNIQUE_NAMES[id])
+    .filter(Boolean);
+
   return (
     <ModalShell
       eyebrow="Session Details"
@@ -64,6 +79,28 @@ export default function SessionDetailModal({
         <span className="text-sm text-content-subtle">
           {formatDuration(session.durationMins)}
         </span>
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold tracking-widest uppercase text-content-subtle mb-2">
+          Techniques
+        </p>
+        {techniqueNames.length > 0 ? (
+          <div className="flex flex-wrap gap-1.5">
+            {techniqueNames.map((name) => (
+              <span
+                key={name}
+                className="rounded-md bg-surface-base border border-chrome px-2 py-1 text-xs font-medium text-content-secondary"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-content-faint italic">
+            No techniques logged for this session.
+          </p>
+        )}
       </div>
 
       <div>

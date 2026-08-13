@@ -37,50 +37,55 @@
   --color-brand-subtle: #60a5fa;
   --color-brand-shadow: rgba(37, 99, 235, 0.2);
 
-  /* White Belt */
-  --color-rating-1: #f8fafc;
-  --color-rating-1-border: #cbd5e1;
-  --color-rating-1-text: #334155;
-  --color-rating-1-hover: #f1f5f9;
-  --color-rating-1-selected: #ffffff;
-  --color-rating-1-selected-border: #94a3b8;
-  --color-rating-1-selected-ring: #cbd5e1;
+  /* Rating 1 — Weak (red) */
+  --color-rating-1: #fee2e2;
+  --color-rating-1-border: #f87171;
+  --color-rating-1-text: #991b1b;
+  --color-rating-1-hover: #fecaca;
+  --color-rating-1-selected: #dc2626;
+  --color-rating-1-selected-border: #b91c1c;
+  --color-rating-1-selected-ring: #f87171;
+  --color-rating-1-selected-text: #ffffff;
 
-  /* Blue Belt */
-  --color-rating-2: #dbeafe;
-  --color-rating-2-border: #3b82f6;
-  --color-rating-2-text: #1e3a8a;
-  --color-rating-2-hover: #bfdbfe;
-  --color-rating-2-selected: #2563eb;
-  --color-rating-2-selected-border: #1d4ed8;
-  --color-rating-2-selected-ring: #60a5fa;
+  /* Rating 2 — Developing (orange) */
+  --color-rating-2: #ffedd5;
+  --color-rating-2-border: #fb923c;
+  --color-rating-2-text: #9a3412;
+  --color-rating-2-hover: #fed7aa;
+  --color-rating-2-selected: #ea580c;
+  --color-rating-2-selected-border: #c2410c;
+  --color-rating-2-selected-ring: #fb923c;
+  --color-rating-2-selected-text: #ffffff;
 
-  /* Purple Belt */
-  --color-rating-3: #ede9fe;
-  --color-rating-3-border: #8b5cf6;
-  --color-rating-3-text: #5b21b6;
-  --color-rating-3-hover: #ddd6fe;
-  --color-rating-3-selected: #7c3aed;
-  --color-rating-3-selected-border: #6d28d9;
-  --color-rating-3-selected-ring: #a78bfa;
+  /* Rating 3 — Mid (amber/yellow) */
+  --color-rating-3: #fef9c3;
+  --color-rating-3-border: #facc15;
+  --color-rating-3-text: #854d0e;
+  --color-rating-3-hover: #fef08a;
+  --color-rating-3-selected: #eab308;
+  --color-rating-3-selected-border: #ca8a04;
+  --color-rating-3-selected-ring: #fde047;
+  --color-rating-3-selected-text: #422006;
 
-  /* Brown Belt */
-  --color-rating-4: #f5e1d4;
-  --color-rating-4-border: #92400e;
-  --color-rating-4-text: #78350f;
-  --color-rating-4-hover: #edd5c4;
-  --color-rating-4-selected: #92400e;
-  --color-rating-4-selected-border: #78350f;
-  --color-rating-4-selected-ring: #b45309;
+  /* Rating 4 — Reliable (lime) */
+  --color-rating-4: #ecfccb;
+  --color-rating-4-border: #a3e635;
+  --color-rating-4-text: #3f6212;
+  --color-rating-4-hover: #d9f99d;
+  --color-rating-4-selected: #84cc16;
+  --color-rating-4-selected-border: #65a30d;
+  --color-rating-4-selected-ring: #bef264;
+  --color-rating-4-selected-text: #1a2e05;
 
-  /* Black Belt */
-  --color-rating-5: #e5e7eb;
-  --color-rating-5-border: #111827;
-  --color-rating-5-text: #111827;
-  --color-rating-5-hover: #d1d5db;
-  --color-rating-5-selected: #111827;
-  --color-rating-5-selected-border: #000000;
-  --color-rating-5-selected-ring: #374151;
+  /* Rating 5 — Strong (green) */
+  --color-rating-5: #dcfce7;
+  --color-rating-5-border: #4ade80;
+  --color-rating-5-text: #14532d;
+  --color-rating-5-hover: #bbf7d0;
+  --color-rating-5-selected: #16a34a;
+  --color-rating-5-selected-border: #15803d;
+  --color-rating-5-selected-ring: #4ade80;
+  --color-rating-5-selected-text: #ffffff;
 
   /* Strong */
   --color-strong: #dcfce7;

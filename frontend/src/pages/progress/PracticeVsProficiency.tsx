@@ -79,7 +79,7 @@ export default function PracticeVsProficiency({
               </div>
               <div className="h-1.5 bg-chrome rounded-full overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-content-secondary transition-all duration-500"
+                  className="h-full rounded-full bg-content-muted transition-all duration-500"
                   style={{ width: `${practicePct}%` }}
                 />
               </div>
