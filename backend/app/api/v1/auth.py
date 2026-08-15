@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.core.security import verify_password, create_access_token, create_refresh_token, verify_token, get_password_hash
 from app.core.cookies import REFRESH_COOKIE_NAME, set_refresh_cookie, clear_refresh_cookie
 from app.schemas.user_schemas import UserResponse
-from app.schemas.auth_schema import TokenResponse, RegisterRequest
+from app.schemas.auth_schemas import TokenResponse, RegisterRequest
 from app.crud import user_crud
 from app.db.session import get_db
 
