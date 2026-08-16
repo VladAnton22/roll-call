@@ -10,7 +10,7 @@ def get_ratings_for_user(db: Session, user_id: UUID) -> list[TechniqueRating]:
 
 def technique_exists(db: Session, technique_id: str) -> bool:
     stmt = select(Technique.id).where(Technique.id == technique_id)
-    return db.scalar(stmt).first() is not None
+    return db.scalars(stmt).first() is not None
 
 def upsert_rating(
         db: Session,

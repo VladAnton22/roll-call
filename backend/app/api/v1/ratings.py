@@ -19,7 +19,7 @@ def list_ratings(
 ):
     return rating_crud.get_ratings_for_user(db, user_id=current_user.id)
 
-@router.put("/{technique_id", response_model=RatingResponse)
+@router.put("/{technique_id}", response_model=RatingResponse)
 def upsert_rating(
         technique_id: str,
         payload: RatingUpsert,

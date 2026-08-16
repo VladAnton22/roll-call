@@ -49,6 +49,7 @@ async function request<T>(
     init: RequestInit = {},
     retry = true,
 ): Promise<T> {
+  console.log(getAccessToken());
   const headers = new Headers(init.headers);
   if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
 
@@ -93,6 +94,15 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     }),
+
+  put: <T>(path: string, body: unknown) =>
+    request<T>(path, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }),
+
+  del: <T>(path: string) => request<T>(path, { method: "DELETE" }),
 
   postForm: <T>(path: string, fields: Record<string, string>) =>
     request<T>(path, {

@@ -8,6 +8,7 @@ import { Login } from "./pages/login/Login.tsx";
 import { Register } from "./pages/register/Register.tsx"
 import {RequireAuth} from "./components/RequireAuth.tsx";
 import { RedirectIfAuthenticated } from "./components/RedirectIfAuthenticated.tsx";
+import { RatingsProvider } from "./context/RatingsContext.tsx";
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                 </Route>
                 {/* Protected - guard first, then the shell, then pages */}
                 <Route element={<RequireAuth />}>
-                    <Route element={<Layout />}>
+                  <Route element={<RatingsProvider><Layout /></RatingsProvider>}>
                         <Route index element={<TechniqueLibrary />} />
                         <Route path="progress" element={<ProgressPage />}/>
                         <Route path="sessions" element={<SessionsPage />}/>
