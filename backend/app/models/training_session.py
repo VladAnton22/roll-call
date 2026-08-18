@@ -73,6 +73,11 @@ class TrainingSession(Base):
         passive_deletes=True,
     )
 
+    @property
+    def technique_ids(self) -> list[str]:
+        # Flattens the link rows to slugs so SessionResponse.from_attributes can read them directly.
+        return [st.technique_id for st in self.techniques]
+
     def __repr__(self) -> str:
         return (
             f"<TrainingSession(id={self.id}, user_id={self.user_id}, "
