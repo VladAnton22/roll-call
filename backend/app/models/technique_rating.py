@@ -15,9 +15,9 @@ from sqlalchemy.dialects.postgresql import UUID
 from app.db.base import Base
 
 class Confidence(str, enum.Enum):
-    LOW = "L",
-    MEDIUM = "M",
-    HIGH = "H",
+    LOW = "L"
+    MEDIUM = "M"
+    HIGH = "H"
 
 class TechniqueRating(Base):
     __tablename__ = "technique_ratings"
