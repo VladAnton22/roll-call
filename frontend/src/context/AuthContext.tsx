@@ -62,7 +62,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Let the API layer flip to anonymous when a mid-session refresh fails
   useEffect(() => {
     setAuthFailureHandler(() => {
-      console.log("[authFailure] handler fired");
       setAccessToken(null);
       setUser(null);
       setStatus("anonymous");
@@ -77,14 +76,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refreshAccessToken()
       .then(() => api.get<User>("/users/me"))
       .then((me) => {
-        console.log("[load] success, cancelled =", cancelled);
         if (!cancelled) {
           setUser(me);
           setStatus("authenticated");
         }
       })
       .catch((err) => {
-        console.log("[load] CAUGHT, cancelled =", cancelled, "err =", err);
         if (!cancelled) setStatus("anonymous");
       });
 

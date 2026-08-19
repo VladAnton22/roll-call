@@ -49,7 +49,6 @@ async function request<T>(
     init: RequestInit = {},
     retry = true,
 ): Promise<T> {
-  console.log(getAccessToken());
   const headers = new Headers(init.headers);
   if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
 

@@ -15,7 +15,7 @@ type ModalState =
   | { kind: "edit"; session: Session };
 
 export default function SessionsPage() {
-  const { sessions, addSession, sessionsThisWeek, minutesThisWeek, updateSession, deleteSession } = useSessionLog();
+  const { sessions, addSession, sessionsThisWeek, minutesThisWeek, updateSession, deleteSession, isLoading, error } = useSessionLog();
   const [modal, setModal] = useState<ModalState>({ kind: "none" });
 
 
@@ -39,7 +39,11 @@ export default function SessionsPage() {
           </PrimaryButton>
         </div>
 
-        {sessions.length > 0 ? (
+        {error && <p className="text-sm text-red-400 mb-3">{error}</p>}
+
+        {isLoading ? (
+          <p className="text-sm text-content-subtle py-12 text-center">Loading sessions...</p>
+        ) : sessions.length > 0 ? (
           <>
             <SessionStats
               sessionsThisWeek={sessionsThisWeek}

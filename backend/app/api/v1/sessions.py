@@ -39,7 +39,7 @@ def create_session(
     return session_crud.create_session(db, user_id=current_user.id, data=payload)
 
 
-@router.get("/{session_id", response_model=SessionResponse)
+@router.get("/{session_id}", response_model=SessionResponse)
 def get_session(
     session_id: UUID,
     current_user: Annotated[User, Depends(get_current_active_user)],
