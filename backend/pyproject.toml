@@ -15,6 +15,7 @@ dependencies = [
     "pyjwt>=2.13.0",
     "pwdlib[argon2]>=0.3.0",
     "python-multipart>=0.0.32",
+    "slowapi>=0.1.10",
 ]
 
 # This is an application, not a distributable package — uv just manages the

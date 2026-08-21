@@ -1,12 +1,13 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import Depends, APIRouter, HTTPException, Response, Cookie, status
+from fastapi import Depends, APIRouter, HTTPException, Response, Cookie, status, Request
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from app.core.security import verify_password, create_access_token, create_refresh_token, verify_token, get_password_hash
 from app.core.cookies import REFRESH_COOKIE_NAME, set_refresh_cookie, clear_refresh_cookie
+from app.core.rate_limit import limiter
 from app.schemas.user_schemas import UserResponse
 from app.schemas.auth_schemas import TokenResponse, RegisterRequest
 from app.crud import user_crud
@@ -22,10 +23,12 @@ def _issue_tokens(response: Response, user_id: str) -> TokenResponse:
     )
 
 @router.post("/token", response_model=TokenResponse)
+@limiter.limit("5/minute")
 def login_for_access_token(
+        request: Request,
         response: Response,
         form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-        db: Session = Depends(get_db),
+        db: Annotated[Session, Depends(get_db)],
 ):
     user = user_crud.get_by_username(db, username=form_data.username)
     if not user or not verify_password(form_data.password, user.password_hash):
@@ -42,7 +45,9 @@ def login_for_access_token(
     return _issue_tokens(response, str(user.id))
 
 @router.post("/register", response_model=UserResponse, status_code=201)
+@limiter.limit("5/hour")
 def register_user(
+        request: Request,
         payload: RegisterRequest,
         db: Annotated[Session, Depends(get_db)],
 ):

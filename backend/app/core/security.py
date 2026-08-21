@@ -21,16 +21,13 @@ def get_password_hash(password: str) -> str:
 # Create token function
 def _create_token(subject: str, token_type: str, expires_delta: timedelta = None) -> str:
     expire = datetime.now(timezone.utc) + expires_delta
-
     payload = {
         "sub": subject,
         "type": token_type,
         "exp": expire,
     }
-
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
-# Wrappers for creating the token
 def create_access_token(subject: str) -> str:
     return _create_token(
         subject=subject,
@@ -55,5 +52,4 @@ def verify_token(token: str, token_type: str):
         return None
     if payload.get("type") != token_type:
         return None
-
     return payload
