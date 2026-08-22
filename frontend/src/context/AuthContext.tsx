@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setStatus("authenticated");
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (!cancelled) setStatus("anonymous");
       });
 
