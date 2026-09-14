@@ -2,7 +2,8 @@
 
 A Brazilian Jiu-Jitsu technique tracker and progress dashboard, built as a portfolio project to run on a prduction **AWS** architecture - full stack app, containerized, deployed on ECS Fargate behind CloudFront.
 
-> **Status** MVP complete and deployed to production. See [Roadmap](#roadmap) for what's done vs. planned.
+> **Status:** MVP complete and deployed to production. See [Roadmap](#roadmap) for what's done vs. planned.
+> **[Live-demo ->](https://rollcallbjj.dev)**
 
 ---
  
